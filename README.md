@@ -6,7 +6,7 @@
 Use the provided `Makefile` to compile and load the driver:
 ```bash
 make all
-sudo insmod simple_char.ko
+sudo insmod mouse_tracker.ko
 ```
 
 ### 2. Check dmesg for Device Registration
@@ -17,19 +17,11 @@ Device registered with major number X
 ```
 Here, X is the dynamically assigned major number for device.
 
-### 3. Create a Device Node
-
-Once you have the major number (X), create the device node:
-```bash
-sudo mknod /dev/simple_char c X 0
-sudo chmod 666 /dev/simple_char
-```
-
-### 4. Interact with the Device
+### 3. Interact with the Device
 
 Use cat or similar tools to read data from the device:
 ```bash
-cat /dev/simple_char
+cat /dev/mouse_tracker
 ```
 
 This will output:
@@ -37,12 +29,12 @@ This will output:
 Hello from the kernel!
 ```
 
-### 5. Unload the Driver
+### 4. Unload the Driver
 
 To unload the module and clean up:
 ```bash
-sudo rmmod simple_char
-sudo rm /dev/simple_char
+sudo rmmod mouse_tracker
+sudo rm /dev/mouse_tracker
 ```
 
 To clean up the build artifacts:
