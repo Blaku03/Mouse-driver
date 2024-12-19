@@ -1,43 +1,13 @@
-# Simple Character Device Driver
+# Accelerated Mouse Driver
 
-## Interacting with the Driver
+This repository contains a C++ program that intercepts events from an existing mouse device, applies acceleration to its movements, and forwards the modified events to a virtual mouse device using the Linux `uinput` subsystem.
 
-### 1. Compile the Driver and Load it into the Kernel
-Use the provided `Makefile` to compile and load the driver:
-```bash
-make all
-sudo insmod mouse_tracker.ko
-```
+## Features
+- **Mouse acceleration**: Dynamically adjusts mouse movement using a logarithmic function.
+- **Virtual mouse device**: Creates a virtual mouse device with enhanced acceleration.
+- **Event forwarding**: Handles relative movement (`REL_X`, `REL_Y`), wheel events, and button clicks.
 
-### 2. Check dmesg for Device Registration
-
-After loading the module, check the kernel log (dmesg) to verify that the device was registered.
-```bash
-Device registered with major number X
-```
-Here, X is the dynamically assigned major number for device.
-
-### 3. Interact with the Device
-
-Use cat or similar tools to read data from the device:
-```bash
-cat /dev/mouse_tracker
-```
-
-This will output:
-```bash
-Hello from the kernel!
-```
-
-### 4. Unload the Driver
-
-To unload the module and clean up:
-```bash
-sudo rmmod mouse_tracker
-sudo rm /dev/mouse_tracker
-```
-
-To clean up the build artifacts:
-```bash
-make clean
-```
+## Prerequisites
+- Linux system with `uinput` enabled.
+- Development tools: `g++`, `make`, and `libc` headers.
+- Root permissions to access `/dev/uinput` and the original mouse device (e.g., `/dev/input/event13`).

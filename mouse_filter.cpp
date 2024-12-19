@@ -101,7 +101,7 @@ int main() {
     struct input_event ev;
     double accelerationFactor = 0.5; // Współczynnik akceleracji
 
-    std::cout << "Nakładanie akceleracji na ruch myszy..." << std::endl;
+    std::cout << "Nakładanie akceleracji na ruch myszy" << std::endl;
 
     while (true) {
         ssize_t bytes = read(mouse_fd, &ev, sizeof(ev));

@@ -1,7 +1,22 @@
-obj-m += mouse_tracker.o
+# Compiler
+CXX = g++
 
-all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+# Compiler flags
+CXXFLAGS = -Wall -Wextra -O2
 
+# Target executable
+TARGET = mouse_filter
+
+# Source file
+SRC = mouse_filter.cpp
+
+# Build the target
+$(TARGET): $(SRC)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC)
+
+# Clean up
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm -f $(TARGET)
+
+# Phony targets
+.PHONY: clean
