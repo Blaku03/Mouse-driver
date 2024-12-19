@@ -2,16 +2,15 @@
 #include <linux/input.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <cstring>
 #include <iostream>
 #include <cmath>
 
 // Ścieżka do oryginalnej myszy
-#define ORIGINAL_MOUSE "/dev/input/event13"
+#define ORIGINAL_MOUSE "/dev/input/event18"
 
 // Funkcja akceleracji
 int applyAcceleration(int value, double factor) {
-    return static_cast<int>(value * (1 + factor * std::log1p(std::abs(value))));
+  return value * abs(value);
 }
 
 // Funkcja konfiguracji wirtualnej myszy
@@ -99,7 +98,7 @@ int main() {
     }
 
     struct input_event ev;
-    double accelerationFactor = 0.5; // Współczynnik akceleracji
+    double accelerationFactor = 2; // Współczynnik akceleracji
 
     std::cout << "Nakładanie akceleracji na ruch myszy" << std::endl;
 
